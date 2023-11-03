@@ -13,6 +13,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'password':{'write_only':True}
         }
+        error_messages = {
+            ''
+        }
         
     def save(self):
         password = self.validated_data['password']
@@ -22,6 +25,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'error': 'El password de confirmacion no coincide'})
         
         if Account.objects.filter(email=self.validated_data['email']).exists():
+            raise serializers.ValidationError({'error':'El email del usuario ya existe'})
+        
+        if Account.objects.filter(email=self.validated_data['username']).exists():
             raise serializers.ValidationError({'error':'El email del usuario ya existe'})
         
         account = Account.objects.create_user(
