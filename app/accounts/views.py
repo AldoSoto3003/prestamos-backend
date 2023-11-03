@@ -17,6 +17,7 @@ class RegistrationView(APIView):
         if serializer.is_valid():
             account = serializer.save()
             data['reponse'] = 'El registro del usuario fue exitoso'
+            data['id'] = str(account.id)
             data['username'] = account.username
             data['email'] = account.email
             data['first_name'] = account.first_name
@@ -43,6 +44,7 @@ class LoginView(APIView):
         account = auth.authenticate(email=email,password=password)
         if account is not None:
             data['response'] = 'El login fue exitoso'
+            data['id'] = str(account.id)
             data['username'] = account.username
             data['email'] = account.email
             data['first_name'] = account.first_name
