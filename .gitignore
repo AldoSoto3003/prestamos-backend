@@ -1,0 +1,15 @@
+.vscode/
+*/__pycache__
+venv
+*.pyc
+db.sqlite3
+media/
+secrets.py
+migracion.txt
+TODO.md
+temp/
+celerybeat*
+diff.bat
+rh.txt
+s.bat
+logs/

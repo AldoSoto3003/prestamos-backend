@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "ee47cf99-0a84-404b-9e24-a064e9eeea99",
+		"name": "Prestamos-Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26638515"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"aldosoto3003@gmail.com\",\r\n    \"password\":\"aldosoto3003\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/account/login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"account",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RegisterUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"aldosoto3003\",\r\n    \"email\": \"aldosoto3003@gmail.com\",\r\n    \"first_name\": \"Aldo\",\r\n    \"last_name\": \"Soto\",\r\n    \"phone_number\": \"6683209979\",\r\n    \"password\": \"aldosoto3003\",\r\n    \"password2\": \"aldosoto3003\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/account/register/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"account",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LogoutUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkzMDgzNTY5LCJpYXQiOjE2OTI5OTcxNjksImp0aSI6IjkzZmU1Y2NjN2Y2MzQ4NTU5YWNiMzRiMWQyMDA2YWJjIiwidXNlcl9pZCI6Mn0.6vLMzKI1Itlg_IUIR_NOtkdhH42a3ny2h8S2ObneLdI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/account/logout/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"account",
+								"logout",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
