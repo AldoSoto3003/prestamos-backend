@@ -4,30 +4,42 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from app.accounts.serializers import RegistrationSerializer
+from app.accounts.models import Account
+
+from .serializers import (
+    UserLoginSerializer,
+    UserRegistrationSerializer,
+    UserListSerializer
+)
 
     
 class RegistrationView(APIView):
     
+    serializer_class = UserRegistrationSerializer
+    permission_classes = (AllowAny,)
+    
     def post(self,request):
-        serializer = RegistrationSerializer(data=request.data)
+        serializer = self.serializer_class(data=request.data)
         data = {}
         
         if serializer.is_valid():
             account = serializer.save()
-            data['reponse'] = 'El registro del usuario fue exitoso'
-            data['id'] = str(account.id)
-            data['username'] = account.username
-            data['email'] = account.email
-            data['first_name'] = account.first_name
-            data['last_name'] = account.last_name
-            data['phone_number'] = account.phone_number
-            
+            status_code = status.HTTP_201_CREATED
             refresh = RefreshToken.for_user(account)
-            data['token'] = {
-                'refresh':str(refresh),
-                'access':str(refresh.access_token)
+            data = {
+                'success':True,
+                'status_code':status_code,
+                'reponse':'El registro del usuario fue exitoso',
+                'user': {
+                    'id':serializer.data['id'],
+                    'username':serializer.data['username'],
+                    'first_name':serializer.data['first_name'],
+                    'last_name':serializer.data['last_name'],
+                    'refresh': str(refresh),
+                    'access':str(refresh.access_token),
+                },
             }
         else:
             data = serializer.errors
@@ -35,27 +47,52 @@ class RegistrationView(APIView):
         return Response(data)
     
 class LoginView(APIView):
+    serializer_class = UserLoginSerializer
+    permission_classes = (AllowAny,)
     
     def post(self,request):
         data = {}
-        email = request.data.get('email')
-        password = request.data.get('password')
-        
-        account = auth.authenticate(email=email,password=password)
-        if account is not None:
-            data['response'] = 'El login fue exitoso'
-            data['id'] = str(account.id)
-            data['username'] = account.username
-            data['email'] = account.email
-            data['first_name'] = account.first_name
-            data['last_name'] = account.last_name
-            data['phone_number'] = account.phone_number
-            refresh = RefreshToken.for_user(account)
-            data['token'] = {
-                'refresh': str(refresh),
-                'access': str(refresh.access_token),
+        serializer = self.serializer_class(data=request.data)
+        valid = serializer.is_valid(raise_exception=True)
+
+        if valid:
+            status_code = status.HTTP_202_ACCEPTED
+            data = {
+                'success':True,
+                'status_code':status_code,
+                'reponse':'El login del usuario fue exitoso',
+                'user': {
+                    'id':serializer.data['id'],
+                    'username':serializer.data['username'],
+                    'first_name':serializer.data['first_name'],
+                    'last_name':serializer.data['last_name'],
+                    'refresh': serializer.data['refresh'],
+                    'access': serializer.data['access'],
+                },
             }
             return Response(data)
+
+class UserListView(APIView):
+    serializer_class = UserListSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        user = request.user
+        if user.role != 1:
+            response = {
+                'success': False,
+                'status_code': status.HTTP_403_FORBIDDEN,
+                'message': 'You are not authorized to perform this action'
+            }
+            return Response(response, status.HTTP_403_FORBIDDEN)
         else:
-            data['error'] = 'Credenciales incorrectas'
-            return Response(data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            users = Account.objects.all()
+            serializer = self.serializer_class(users, many=True)
+            response = {
+                'success': True,
+                'status_code': status.HTTP_200_OK,
+                'message': 'Successfully fetched users',
+                'users': serializer.data
+
+            }
+            return Response(response, status=status.HTTP_200_OK)

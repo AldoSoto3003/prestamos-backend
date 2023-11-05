@@ -4,7 +4,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
-from app.accounts.views import LoginView,RegistrationView
+from app.accounts.views import LoginView,RegistrationView,UserListView
 
 # urlpatterns = [
 #     path('login/',login_view, name='login'),    
@@ -17,5 +17,6 @@ from app.accounts.views import LoginView,RegistrationView
 
 urlpatterns = [
     path('login/',LoginView.as_view(),name='LoginView'),
-    path('register_user/',RegistrationView.as_view(),name='RegisterView')
+    path('register_user/',RegistrationView.as_view(),name='RegisterView'),
+    path('list_users/', UserListView.as_view(), name='list_users')
 ]
