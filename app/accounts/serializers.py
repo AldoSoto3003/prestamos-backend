@@ -25,10 +25,10 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         if self.validated_data['password'] != self.validated_data['password2']:
             raise serializers.ValidationError({'error':'passwords no coinciden'})
         
-        if Account.objects.filter(email=self.validated_data['email'].exists()):
+        if Account.objects.filter(email=self.validated_data['email']).exists():
             raise serializers.ValidationError({'error':'El email ya existe'})
         
-        if Account.objects.filter(username=self.validated_data['username'].exists()):
+        if Account.objects.filter(username=self.validated_data['username']).exists():
             raise serializers.ValidationError({'error':'El username ya existe'})
 
         auth_user = Account.objects.create_user(

@@ -15,3 +15,6 @@ s.bat
 logs/
 
 /prueba.py
+
+# Dockers
+/sql
