@@ -90,6 +90,7 @@ class AuthMeView(APIView):
                 'reponse':'El authme del usuario fue exitoso',
                 'user': {
                     'id':user.id,
+                    'email':user.email,
                     'username':user.username,
                     'first_name':user.first_name,
                     'last_name':user.last_name,
@@ -98,7 +99,6 @@ class AuthMeView(APIView):
             }    
         return Response(response, status=status.HTTP_200_OK)
         
-
 class UserListView(APIView):
     serializer_class = UserListSerializer
     permission_classes = [IsAuthenticated]
