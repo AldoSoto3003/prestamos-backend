@@ -11,7 +11,8 @@ from app.accounts.models import Account
 from .serializers import (
     UserLoginSerializer,
     UserRegistrationSerializer,
-    UserListSerializer
+    UserListSerializer,
+    AuthMeSerializer,
 )
 
     
@@ -72,11 +73,38 @@ class LoginView(APIView):
             }
             return Response(data)
 
+class AuthMeView(APIView):
+
+    serializer_class = AuthMeSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get(self,request):
+        
+        user = Account.objects.get(email=request.user)
+        if user:
+            print(user)
+            status_code = status.HTTP_200_OK
+            response = {
+                'success':True,
+                'status_code':status_code,
+                'reponse':'El authme del usuario fue exitoso',
+                'user': {
+                    'id':user.id,
+                    'username':user.username,
+                    'first_name':user.first_name,
+                    'last_name':user.last_name,
+                    'rol':user.role,
+                },
+            }    
+        return Response(response, status=status.HTTP_200_OK)
+        
+
 class UserListView(APIView):
     serializer_class = UserListSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
+
         user = request.user
         if user.role != 1:
             response = {

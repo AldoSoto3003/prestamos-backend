@@ -94,7 +94,11 @@ class UserLoginSerializer(serializers.Serializer):
         
         except Account.DoesNotExist:
             raise serializers.ValidationError('Credenciales incorrectas')
-        
+
+class AuthMeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = '__all__'   
 
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
