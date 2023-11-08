@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from app.accounts.models import Account
+from apps.accounts.models import Account
 
 from .serializers import (
     UserLoginSerializer,
