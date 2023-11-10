@@ -11,9 +11,9 @@
     
     4.- Ejecutar migraciones de BDD:
         py manage.py migrate
-    
-    5.- Ejecutar el servidor de pruebas:
-        py manage.py runserver
 
-    6.- Crearte un super usuario:
+    5.- Crearte un super usuario:
         py manage.py createsuperuser y seguir los pasos
+    
+    6.- Ejecutar el servidor de pruebas:
+        py manage.py runserver
