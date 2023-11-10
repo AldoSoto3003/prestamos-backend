@@ -264,7 +264,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:8000/api/prestamos/clients/",
+									"raw": "http://127.0.0.1:8000/api/prestamos/client/get-all/",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -276,7 +276,8 @@
 									"path": [
 										"api",
 										"prestamos",
-										"clients",
+										"client",
+										"get-all",
 										""
 									]
 								}
@@ -299,7 +300,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:8000/api/prestamos/client/1",
+									"raw": "http://127.0.0.1:8000/api/prestamos/client/get/1/",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -312,7 +313,9 @@
 										"api",
 										"prestamos",
 										"client",
-										"1"
+										"get",
+										"1",
+										""
 									]
 								}
 							},
