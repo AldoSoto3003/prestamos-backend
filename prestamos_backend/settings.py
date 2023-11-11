@@ -28,9 +28,10 @@ SECRET_KEY = 'django-insecure-#jrylsji^dsb)l*!qg8muhpf36lhl#h%-+k#4@%i8z#l(%@35j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
+ALLOWED_HOSTS = [ ]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8100',
 ]
 
 
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    'corsheaders',
     'apps.accounts',
     'apps.prestamos',
 ]
@@ -58,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'prestamos_backend.urls'
