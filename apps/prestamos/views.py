@@ -106,29 +106,29 @@ class MoneyLenderListView(APIView):
             'success':True,
             'status_code':status_code,
             'response':'Ok',
-            'client': serializer.data
+            'prestamistas': serializer.data
         }
         return Response(data,status=status.HTTP_200_OK)
 
 class MoneyLenderView(APIView):
     
-    serializer_class = ClientSerializer
+    serializer_class = MoneyLenderSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_object(self,pk):
         try:
-            return Client.objects.get(pk=pk)
-        except Client.DoesNotExist:
+            return MoneyLender.objects.get(pk=pk)
+        except MoneyLender.DoesNotExist:
             data = {
                 'success': False,
                 'status_code': status.HTTP_404_NOT_FOUND,
-                'response':'No se encontró al usuario',
+                'response':'No se encontró al prestamista',
             }
             raise ValidationError(data)
     
     def get(self,request,pk):
-        user = self.get_object(pk)
-        serializer = self.serializer_class(user)
+        moneylender = self.get_object(pk)
+        serializer = self.serializer_class(moneylender)
         return Response(serializer.data)
     
     def post(self,request):
@@ -136,13 +136,13 @@ class MoneyLenderView(APIView):
         serializer.validate(data=request.data)
         
         if serializer.is_valid():
-            client = serializer.save()
+            moneylender = serializer.save()
             status_code = status.HTTP_201_CREATED
             data = {
                 'success':True,
                 'status_code':status_code,
-                'response':'El registro del cliente ha sido exitoso',
-                'client': {
+                'response':'El registro del prestamista ha sido exitoso',
+                'prestamista': {
                     'id': serializer.data['id'],
                     'first_name':serializer.data['first_name'],
                     'last_name':serializer.data['last_name'],
@@ -156,8 +156,8 @@ class MoneyLenderView(APIView):
             return Response(serializer.errors)
         
     def patch(self,request,pk):
-        client = self.get_object(pk)
-        serializer = self.serializer_class(client,request.data, partial=True)
+        moneylender = self.get_object(pk)
+        serializer = self.serializer_class(moneylender,request.data, partial=True)
         
         if serializer.is_valid():
             serializer.save()
@@ -165,11 +165,11 @@ class MoneyLenderView(APIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
     def delete(self,request,pk):
-        client = self.get_object(pk)
-        client.delete()
+        moneylender = self.get_object(pk)
+        moneylender.delete()
         data = {
                 'success': True,
                 'status_code': status.HTTP_204_NO_CONTENT,
-                'response':'Usuario {} {} eliminado'.format(client.first_name, client.last_name),
+                'response':'Usuario {} {} eliminado'.format(moneylender.first_name, moneylender.last_name),
             }
         return Response(data,status=status.HTTP_204_NO_CONTENT)

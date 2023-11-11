@@ -43,7 +43,7 @@ class ClientSerializer(serializers.ModelSerializer):
 
 class MoneyLenderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Client
+        model = MoneyLender
         fields = (
             'id',
             'first_name',
@@ -55,23 +55,25 @@ class MoneyLenderSerializer(serializers.ModelSerializer):
     
     def validate(self,data):
         
-        client_id = self.instance.id if self.instance else None
+        moneylender_id = self.instance.id if self.instance else None
+
+        print(moneylender_id)
         
-        if Client.objects.exclude(id=client_id).filter(email=data.get('email')).exists():
+        if MoneyLender.objects.exclude(id=moneylender_id).filter(email=data.get('email')).exists():
             status_code = status.HTTP_400_BAD_REQUEST
             data = {
                 "success":False,
                 "status_code": status_code,
-                "response":"Ya existe un cliente con este email"
+                "response":"Ya existe un prestamista con este email"
             }
             raise serializers.ValidationError(data, code=status.HTTP_400_BAD_REQUEST) 
         
-        if Client.objects.exclude(id=client_id).filter(phone_number=data.get('phone_number')).exists():
+        if MoneyLender.objects.exclude(id=moneylender_id).filter(phone_number=data.get('phone_number')).exists():
             status_code = status.HTTP_400_BAD_REQUEST
             data = {
                 "success":False,
                 "status_code": status_code,
-                "response":"Ya existe un cliente con este numero de telefono"
+                "response":"Ya existe un prestamista con este numero de telefono"
             }
             raise serializers.ValidationError(data, code=status.HTTP_400_BAD_REQUEST) 
         

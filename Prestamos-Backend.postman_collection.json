@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "a97e81ae-815a-4174-a49d-92906b650a2b",
+		"_postman_id": "348e20a3-3864-46c2-a65d-ea9d6edc6d32",
 		"name": "Prestamos-Backend",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26638515"
+		"_exporter_id": "23949579"
 	},
 	"item": [
 		{
@@ -442,6 +442,222 @@
 										"client",
 										"update",
 										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "MoneyLender",
+					"item": [
+						{
+							"name": "MoneyLender Get All",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNzc2NzU0LCJpYXQiOjE2OTkyNDA3NTQsImp0aSI6IjU4YzY0NzllNTg3MTRjZjY4NGM0MDlhZDI1NWM2MjJkIiwidXNlcl9pZCI6MX0.gGR7b8_Lf6Xzv-rzLQyPMjU-XxmY7V1TM3nuisbxG7o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/prestamos/moneylender/get-all/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"prestamos",
+										"moneylender",
+										"get-all",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MoneyLender By ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNzc2NzU0LCJpYXQiOjE2OTkyNDA3NTQsImp0aSI6IjU4YzY0NzllNTg3MTRjZjY4NGM0MDlhZDI1NWM2MjJkIiwidXNlcl9pZCI6MX0.gGR7b8_Lf6Xzv-rzLQyPMjU-XxmY7V1TM3nuisbxG7o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/prestamos/moneylender/get/1/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"prestamos",
+										"moneylender",
+										"get",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MoneyLender Add",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNzc2NzU0LCJpYXQiOjE2OTkyNDA3NTQsImp0aSI6IjU4YzY0NzllNTg3MTRjZjY4NGM0MDlhZDI1NWM2MjJkIiwidXNlcl9pZCI6MX0.gGR7b8_Lf6Xzv-rzLQyPMjU-XxmY7V1TM3nuisbxG7o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\":\"Aldo\",\r\n    \"last_name\":\"Soto\",\r\n    \"phone_number\":\"66823209279\",\r\n    \"address\":\"Belizario #530\",\r\n    \"email\":\"aldosoto@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/prestamos/moneylender/add/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"prestamos",
+										"moneylender",
+										"add",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MoneyLender Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNzc2NzU0LCJpYXQiOjE2OTkyNDA3NTQsImp0aSI6IjU4YzY0NzllNTg3MTRjZjY4NGM0MDlhZDI1NWM2MjJkIiwidXNlcl9pZCI6MX0.gGR7b8_Lf6Xzv-rzLQyPMjU-XxmY7V1TM3nuisbxG7o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\":\"Gabriel\",\r\n    \"last_name\":\"Herrera\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/prestamos/moneylender/update/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"prestamos",
+										"moneylender",
+										"update",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MoneyLender Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNzc2NzU0LCJpYXQiOjE2OTkyNDA3NTQsImp0aSI6IjU4YzY0NzllNTg3MTRjZjY4NGM0MDlhZDI1NWM2MjJkIiwidXNlcl9pZCI6MX0.gGR7b8_Lf6Xzv-rzLQyPMjU-XxmY7V1TM3nuisbxG7o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/prestamos/moneylender/update/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"prestamos",
+										"moneylender",
+										"update",
+										"1"
 									]
 								}
 							},
