@@ -554,7 +554,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"first_name\":\"Aldo\",\r\n    \"last_name\":\"Soto\",\r\n    \"phone_number\":\"66823209279\",\r\n    \"address\":\"Belizario #530\",\r\n    \"email\":\"aldosoto@gmail.com\"\r\n}",
+									"raw": "{\r\n    \"first_name\":\"Aldo\",\r\n    \"last_name\":\"Soto\",\r\n    \"phone_number\":\"66823209280\",\r\n    \"address\":\"Belizario #530\",\r\n    \"email\":\"aldosoto3003@gmail.com\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -656,6 +656,233 @@
 										"api",
 										"prestamos",
 										"moneylender",
+										"update",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Funds",
+					"item": [
+						{
+							"name": "Fund By ID",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNzc2NzU0LCJpYXQiOjE2OTkyNDA3NTQsImp0aSI6IjU4YzY0NzllNTg3MTRjZjY4NGM0MDlhZDI1NWM2MjJkIiwidXNlcl9pZCI6MX0.gGR7b8_Lf6Xzv-rzLQyPMjU-XxmY7V1TM3nuisbxG7o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/prestamos/fund/get/2/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"prestamos",
+										"fund",
+										"get",
+										"2",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fund By Moneylender",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNzc2NzU0LCJpYXQiOjE2OTkyNDA3NTQsImp0aSI6IjU4YzY0NzllNTg3MTRjZjY4NGM0MDlhZDI1NWM2MjJkIiwidXNlcl9pZCI6MX0.gGR7b8_Lf6Xzv-rzLQyPMjU-XxmY7V1TM3nuisbxG7o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/prestamos/fund/get-by-moneylender/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"prestamos",
+										"fund",
+										"get-by-moneylender",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fund Add",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNzc2NzU0LCJpYXQiOjE2OTkyNDA3NTQsImp0aSI6IjU4YzY0NzllNTg3MTRjZjY4NGM0MDlhZDI1NWM2MjJkIiwidXNlcl9pZCI6MX0.gGR7b8_Lf6Xzv-rzLQyPMjU-XxmY7V1TM3nuisbxG7o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"moneylender\":2,\r\n    \"amount\":10000.50\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/prestamos/fund/add/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"prestamos",
+										"fund",
+										"add",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fund Update (INHABIL)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNzc2NzU0LCJpYXQiOjE2OTkyNDA3NTQsImp0aSI6IjU4YzY0NzllNTg3MTRjZjY4NGM0MDlhZDI1NWM2MjJkIiwidXNlcl9pZCI6MX0.gGR7b8_Lf6Xzv-rzLQyPMjU-XxmY7V1TM3nuisbxG7o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/prestamos/fund/update/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"prestamos",
+										"fund",
+										"update",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fund Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNzc2NzU0LCJpYXQiOjE2OTkyNDA3NTQsImp0aSI6IjU4YzY0NzllNTg3MTRjZjY4NGM0MDlhZDI1NWM2MjJkIiwidXNlcl9pZCI6MX0.gGR7b8_Lf6Xzv-rzLQyPMjU-XxmY7V1TM3nuisbxG7o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/prestamos/fund/update/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"prestamos",
+										"fund",
 										"update",
 										"1"
 									]

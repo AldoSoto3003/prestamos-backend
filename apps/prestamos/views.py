@@ -6,11 +6,13 @@ from rest_framework.permissions import IsAuthenticated
 
 from .models import (
     Client,
+    Fund,
     MoneyLender
     )
 
 from .serializers import (
     ClientSerializer,
+    FundSerializer,
     MoneyLenderSerializer,
 )
 
@@ -106,7 +108,7 @@ class MoneyLenderListView(APIView):
             'success':True,
             'status_code':status_code,
             'response':'Ok',
-            'prestamistas': serializer.data
+            'moneylenders': serializer.data
         }
         return Response(data,status=status.HTTP_200_OK)
 
@@ -173,3 +175,91 @@ class MoneyLenderView(APIView):
                 'response':'Usuario {} {} eliminado'.format(moneylender.first_name, moneylender.last_name),
             }
         return Response(data,status=status.HTTP_204_NO_CONTENT)
+    
+class FundByMoneyLenderView(APIView):
+    serializer_class = FundSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self,fk):
+        try:
+            return Fund.objects.get(moneylender=fk)
+        except Fund.DoesNotExist:
+            data = {
+                'success': False,
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'response':'No se encontró el fondo del prestamista',
+            }
+            raise ValidationError(data)
+
+    
+    def get(self,request,fk):
+        fund = self.get_object(fk)
+        serializer = self.serializer_class(fund,)
+        status_code = status.HTTP_200_OK
+        data = {
+            'success':True,
+            'status_code':status_code,
+            'response':'Ok',
+            'funds': serializer.data
+        }
+        return Response(data,status=status.HTTP_200_OK)
+
+class FundView(APIView):
+    
+    serializer_class = FundSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self,pk):
+        try:
+            return Fund.objects.get(pk=pk)
+        except Fund.DoesNotExist:
+            data = {
+                'success': False,
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'response':'No se encontró al fondo del prestamista',
+            }
+            raise ValidationError(data)
+    
+    def get(self,request,pk):
+        fund = self.get_object(pk)
+        serializer = self.serializer_class(fund)
+        return Response(serializer.data)
+    
+    def post(self,request):
+        serializer = self.serializer_class(data=request.data)
+
+        if serializer.is_valid():
+            fund = serializer.save()
+            status_code = status.HTTP_201_CREATED
+            data = {
+                'success':True,
+                'status_code':status_code,
+                'response':'Se ha registrado un fondo para el prestamista',
+                'prestamista': {
+                    'id': serializer.data['id'],
+                    'amount':serializer.data['amount'],
+                }
+            }
+            return Response(data,status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors)
+        
+    def patch(self,request,pk):
+        return Response({'error':'esta vista está inhabilitada imbecil'},status=status.HTTP_400_BAD_REQUEST)
+        fund = self.get_object(pk)
+        serializer = self.serializer_class(fund,request.data, partial=True)
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+    
+    def delete(self,request,pk):
+        fund = self.get_object(pk)
+        fund.delete()
+        data = {
+                'success': True,
+                'status_code': status.HTTP_204_NO_CONTENT,
+                'response':'Fondo eliminado',
+            }
+        return Response(data,status=status.HTTP_204_NO_CONTENT)
+    

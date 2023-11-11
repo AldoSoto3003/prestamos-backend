@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .models import Client,MoneyLender,Fondo
+from .models import Client,MoneyLender,Fund
 
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -56,8 +56,6 @@ class MoneyLenderSerializer(serializers.ModelSerializer):
     def validate(self,data):
         
         moneylender_id = self.instance.id if self.instance else None
-
-        print(moneylender_id)
         
         if MoneyLender.objects.exclude(id=moneylender_id).filter(email=data.get('email')).exists():
             status_code = status.HTTP_400_BAD_REQUEST
@@ -77,4 +75,21 @@ class MoneyLenderSerializer(serializers.ModelSerializer):
             }
             raise serializers.ValidationError(data, code=status.HTTP_400_BAD_REQUEST) 
         
+        return data
+    
+class FundSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Fund
+        fields = '__all__'
+
+    def validate(self,data):
+        if Fund.objects.filter(moneylender_id=data.get('moneylender')).exists():
+            status_code = status.HTTP_400_BAD_REQUEST
+            data = {
+                "success":False,
+                "status_code": status_code,
+                "response":"Ya existe un fondo para este prestamista"
+            }
+            raise serializers.ValidationError(data,status.HTTP_400_BAD_REQUEST) 
         return data

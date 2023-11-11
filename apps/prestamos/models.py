@@ -41,8 +41,8 @@ class MoneyLender(BaseModel):
     def __str__(self):
         return self.first_name + self.last_name
     
-class Fondo(BaseModel):
-    id_prestamista = models.ForeignKey(MoneyLender, on_delete=models.CASCADE)
+class Fund(BaseModel):
+    moneylender = models.ForeignKey(MoneyLender, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10,decimal_places=2)
 
     objects = BaseModelManager()
