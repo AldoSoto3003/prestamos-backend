@@ -31,11 +31,8 @@ DEBUG = True
 ALLOWED_HOSTS = [ ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8000',
+    'http://localhost:8100',
 ]
-
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',

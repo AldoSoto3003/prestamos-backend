@@ -31,6 +31,25 @@ class ClientListView(APIView):
             'client': serializer.data
         }
         return Response(data,status=status.HTTP_200_OK)
+class ClientByNameView(APIView):
+    serializer_class = ClientSerializer
+    permission_classes = (IsAuthenticated,)
+    
+    def get_object(self,name):
+        try:
+            return Client.objects.filter(first_name__icontains=name)
+        except Client.DoesNotExist:
+            data = {
+                'success': False,
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'response':'No se encontró al usuario',
+            }
+            raise ValidationError(data)
+    
+    def get(self,request,name):
+        user = self.get_object(name)
+        serializer = self.serializer_class(user, many=True)
+        return Response(serializer.data)
 
 class ClientView(APIView):
     

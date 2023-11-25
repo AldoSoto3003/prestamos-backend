@@ -2,6 +2,7 @@ from django.urls import path
 
 from .views import (
     ClientView,
+    ClientByNameView,
     ClientListView,
     MoneyLenderView,
     MoneyLenderListView,
@@ -12,6 +13,7 @@ from .views import (
 urlpatterns = [
     path('client/get-all/',ClientListView.as_view(),name='client-get-all'),
     path('client/get/<int:pk>/',ClientView.as_view(),name='client-get-id'),
+    path('client/get/<str:name>/',ClientByNameView.as_view(),name='client-get-name'),
     path('client/add/',ClientView.as_view(),name='client-add'),
     path('client/update/<int:pk>',ClientView.as_view(),name='client-update'),
     path('client/delete/<int:pk>',ClientView.as_view(),name='client-delete'),
