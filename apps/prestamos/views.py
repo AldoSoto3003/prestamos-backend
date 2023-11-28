@@ -31,6 +31,7 @@ class ClientListView(APIView):
             'client': serializer.data
         }
         return Response(data,status=status.HTTP_200_OK)
+
 class ClientByNameView(APIView):
     serializer_class = ClientSerializer
     permission_classes = (IsAuthenticated,)
@@ -47,9 +48,16 @@ class ClientByNameView(APIView):
             raise ValidationError(data)
     
     def get(self,request,name):
-        user = self.get_object(name)
-        serializer = self.serializer_class(user, many=True)
-        return Response(serializer.data)
+        client = self.get_object(name)
+        serializer = self.serializer_class(client, many=True)
+        status_code = status.HTTP_200_OK
+        data = {
+            'success':True,
+            'status_code':status_code,
+            'response':'Ok',
+            'clients': serializer.data
+        }
+        return Response(data,status=status.HTTP_200_OK)
 
 class ClientView(APIView):
     
@@ -133,7 +141,14 @@ class MoneyLenderByNameView(APIView):
     def get(self,request,name):
         moneylender = self.get_object(name)
         serializer = self.serializer_class(moneylender, many=True)
-        return Response(serializer.data)
+        status_code = status.HTTP_200_OK
+        data = {
+            'success':True,
+            'status_code':status_code,
+            'response':'Ok',
+            'moneylenders': serializer.data
+        }
+        return Response(data,status=status.HTTP_200_OK)
 
 class MoneyLenderListView(APIView):
     serializer_class = MoneyLenderSerializer

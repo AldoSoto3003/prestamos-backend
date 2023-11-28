@@ -60,4 +60,7 @@ class LoanDetail(BaseModel):
     loan = models.ForeignKey(Loan,on_delete=models.CASCADE)
     moneylender = models.ForeignKey(MoneyLender,on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10,decimal_places=2)
+
+    objects = BaseModelManager()
+
     
