@@ -338,7 +338,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"first_name\":\"Aldo\",\r\n    \"last_name\":\"Soto\",\r\n    \"phone_number\":\"66823209279\",\r\n    \"address\":\"Belizario #530\",\r\n    \"email\":\"aldosoto@gmail.com\"\r\n}",
+									"raw": "{\r\n    \"first_name\":\"Aldo\",\r\n    \"last_name\":\"Soto\",\r\n    \"phone_number\":\"66113259279\",\r\n    \"address\":\"Calle onix #530\",\r\n    \"email\":\"aldosoto3@gmail.com\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -442,6 +442,43 @@
 										"client",
 										"update",
 										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Client By Name",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNzc2NzU0LCJpYXQiOjE2OTkyNDA3NTQsImp0aSI6IjU4YzY0NzllNTg3MTRjZjY4NGM0MDlhZDI1NWM2MjJkIiwidXNlcl9pZCI6MX0.gGR7b8_Lf6Xzv-rzLQyPMjU-XxmY7V1TM3nuisbxG7o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/prestamos/client/get/al/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"prestamos",
+										"client",
+										"get",
+										"al",
+										""
 									]
 								}
 							},
@@ -554,7 +591,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"first_name\":\"Aldo\",\r\n    \"last_name\":\"Soto\",\r\n    \"phone_number\":\"66823209280\",\r\n    \"address\":\"Belizario #530\",\r\n    \"email\":\"aldosoto3003@gmail.com\"\r\n}",
+									"raw": "{\r\n    \"first_name\":\"Aldo\",\r\n    \"last_name\":\"Soto\",\r\n    \"phone_number\":\"66823279280\",\r\n    \"address\":\"Belizario #530\",\r\n    \"email\":\"aldosoto300s3@gmail.com\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -658,6 +695,43 @@
 										"moneylender",
 										"update",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MoneyLender by Name",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNzc2NzU0LCJpYXQiOjE2OTkyNDA3NTQsImp0aSI6IjU4YzY0NzllNTg3MTRjZjY4NGM0MDlhZDI1NWM2MjJkIiwidXNlcl9pZCI6MX0.gGR7b8_Lf6Xzv-rzLQyPMjU-XxmY7V1TM3nuisbxG7o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/prestamos/moneylender/get/ald/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"prestamos",
+										"moneylender",
+										"get",
+										"ald",
+										""
 									]
 								}
 							},
@@ -822,7 +896,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "",
+									"raw": "{\r\n    \"moneylender\":2,\r\n    \"amount\":10000.50\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"

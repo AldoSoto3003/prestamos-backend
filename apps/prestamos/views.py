@@ -115,6 +115,26 @@ class ClientView(APIView):
             }
         return Response(data,status=status.HTTP_204_NO_CONTENT)
 
+class MoneyLenderByNameView(APIView):
+    serializer_class = MoneyLenderSerializer
+    permission_classes = (IsAuthenticated,)
+    
+    def get_object(self,name):
+        try:
+            return MoneyLender.objects.filter(first_name__icontains=name)
+        except MoneyLender.DoesNotExist:
+            data = {
+                'success': False,
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'response':'No se encontró al usuario',
+            }
+            raise ValidationError(data)
+    
+    def get(self,request,name):
+        moneylender = self.get_object(name)
+        serializer = self.serializer_class(moneylender, many=True)
+        return Response(serializer.data)
+
 class MoneyLenderListView(APIView):
     serializer_class = MoneyLenderSerializer
     permission_classes = (IsAuthenticated,)

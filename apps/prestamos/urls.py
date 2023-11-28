@@ -6,8 +6,9 @@ from .views import (
     ClientListView,
     MoneyLenderView,
     MoneyLenderListView,
-    FundView,
+    MoneyLenderByNameView,
     FundByMoneyLenderView,
+    FundView,
     )
 
 urlpatterns = [
@@ -20,6 +21,7 @@ urlpatterns = [
     
     path('moneylender/get-all/',MoneyLenderListView.as_view(),name='moneylender-get-all'),
     path('moneylender/get/<int:pk>/',MoneyLenderView.as_view(),name='moneylender-get-id'),
+    path('moneylender/get/<str:name>/',MoneyLenderByNameView.as_view(),name='client-get-name'),
     path('moneylender/add/',MoneyLenderView.as_view(),name='moneylender-add'),
     path('moneylender/update/<int:pk>',MoneyLenderView.as_view(),name='moneylender-update'),
     path('moneylender/delete/<int:pk>',MoneyLenderView.as_view(),name='moneylender-delete'),
