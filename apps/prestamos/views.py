@@ -13,6 +13,8 @@ from .models import (
 from .serializers import (
     ClientSerializer,
     FundSerializer,
+    LoanDetailSerializer,
+    LoanSerializer,
     MoneyLenderSerializer,
 )
 
@@ -317,3 +319,19 @@ class FundView(APIView):
             }
         return Response(data,status=status.HTTP_204_NO_CONTENT)
     
+class LoanView(APIView):
+        
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        loan_serializer = LoanSerializer(data=request.data['prestamo'])
+        loan_serializer.is_valid(raise_exception=True)
+
+        loan_detail_serializer = LoanDetailSerializer(data=request.data['detalles'], many=True)
+        loan_detail_serializer.is_valid(raise_exception=True)
+
+        loan = loan_serializer.save()
+        loan_detail_serializer.save(loan=loan)
+
+        return Response({'success': True, 'message': 'Préstamo y detalles creados con éxito.'}, status=status.HTTP_201_CREATED)
+

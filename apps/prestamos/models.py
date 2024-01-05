@@ -51,7 +51,7 @@ class Loan(BaseModel):
 
     client = models.ForeignKey(Client,on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10,decimal_places=2)
-    interest_rate = models.DecimalField(max_digits=3,decimal_places=2)
+    interest_rate = models.DecimalField(max_digits=10,decimal_places=2)
 
     objects = BaseModelManager()
 

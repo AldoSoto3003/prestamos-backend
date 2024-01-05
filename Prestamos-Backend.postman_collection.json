@@ -383,7 +383,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"first_name\": \"Gabriel\",\r\n    \"last_name\": \"Soto\",\r\n    \"phone_number\": \"6683209970\",\r\n    \"address\": \"Belizario #530\",\r\n    \"email\": \"aldo@gmail.com\"\r\n}",
+									"raw": "{\r\n    \"first_name\": \"Gabriel\",\r\n    \"last_name\": \"Soto\",\r\n    \"phone_number\": \"6683219970\",\r\n    \"address\": \"Onix #530\",\r\n    \"email\": \"aldo123@gmail.com\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -959,6 +959,56 @@
 										"fund",
 										"update",
 										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Loan",
+					"item": [
+						{
+							"name": "Loan Add",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM1Nzk3MjE0LCJpYXQiOjE3MDQyNjEyMTQsImp0aSI6ImU5M2FlOGFkOGNmNzRlYjM5NmZjMjdiNzg2YWRlYzQ5IiwidXNlcl9pZCI6MX0.JaFNBAXt0bcP30qX8L-9Vg0wYqUa_ZIXkzb6nreqVK4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"prestamo\": {\r\n    \"client\": 1,\r\n    \"amount\": 1000,\r\n    \"interest_rate\":10.00,\r\n    \"fecha\": \"2024-01-01\"\r\n  },\r\n  \"detalles\": [\r\n    {\r\n      \"moneylender\": 1,\r\n      \"amount\": 500\r\n    },\r\n    {\r\n      \"moneylender\": 2,\r\n      \"amount\": 500\r\n    }\r\n  ]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/prestamos/loan/add/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"prestamos",
+										"loan",
+										"add",
+										""
 									]
 								}
 							},

@@ -9,6 +9,7 @@ from .views import (
     MoneyLenderByNameView,
     FundByMoneyLenderView,
     FundView,
+    LoanView,
     )
 
 urlpatterns = [
@@ -31,4 +32,7 @@ urlpatterns = [
     path('fund/add/',FundView.as_view(),name='fund-add'),
     path('fund/update/<int:pk>',FundView.as_view(),name='fund-update'),
     path('fund/delete/<int:pk>',FundView.as_view(),name='fund-delete'),
+
+    path('loan/add/',LoanView.as_view(),name='loan-add'),
+
 ]

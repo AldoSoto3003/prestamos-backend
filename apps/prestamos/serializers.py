@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .models import Client,MoneyLender,Fund
+from .models import Client,MoneyLender,Fund, Loan, LoanDetail
 
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -93,3 +93,17 @@ class FundSerializer(serializers.ModelSerializer):
             }
             raise serializers.ValidationError(data,status.HTTP_400_BAD_REQUEST) 
         return data
+    
+class LoanSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Loan
+        fields = '__all__'
+    
+class LoanDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LoanDetail
+        fields = (
+            'moneylender',
+            'amount'
+        )
