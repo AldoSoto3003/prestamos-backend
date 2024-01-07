@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [ ]
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200',
+    'http://localhost:8100',
 ]
 
 INSTALLED_APPS = [
