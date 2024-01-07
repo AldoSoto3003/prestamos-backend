@@ -324,7 +324,8 @@ class LoanView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
-        loan_serializer = LoanSerializer(data=request.data['prestamo'])
+        print(request.data)
+        loan_serializer = LoanSerializer(data=request.data)
         loan_serializer.is_valid(raise_exception=True)
 
         loan_detail_serializer = LoanDetailSerializer(data=request.data['detalles'], many=True)
