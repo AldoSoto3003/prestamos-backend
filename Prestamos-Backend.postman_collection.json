@@ -986,7 +986,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"client\": 1,\r\n    \"amount\": 234,\r\n    \"interest_rate\": 234,\r\n    \"date\": \"2024-01-04\",\r\n    \"detalles\": [\r\n        {\r\n            \"moneylender\": \"1\",\r\n            \"amount\": \"123\"\r\n        },\r\n        {\r\n            \"moneylender\": \"1\",\r\n            \"amount\": \"123\"\r\n        }\r\n    ]\r\n}",
+									"raw": "{\r\n    \"client\": 1,\r\n    \"subtotal\":1000,\r\n    \"total_amount\": 0.00,\r\n    \"interest_rate\": 234,\r\n    \"date\": \"2024-01-04\",\r\n    \"detalles\": [\r\n        {\r\n            \"moneylender\": \"1\",\r\n            \"amount\": \"500\"\r\n        },\r\n        {\r\n            \"moneylender\": \"1\",\r\n            \"amount\": \"500\"\r\n        }\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1008,6 +1008,42 @@
 										"prestamos",
 										"loan",
 										"add",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Loan Get All",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM1Nzk3MjE0LCJpYXQiOjE3MDQyNjEyMTQsImp0aSI6ImU5M2FlOGFkOGNmNzRlYjM5NmZjMjdiNzg2YWRlYzQ5IiwidXNlcl9pZCI6MX0.JaFNBAXt0bcP30qX8L-9Vg0wYqUa_ZIXkzb6nreqVK4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/prestamos/loan/get-all/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"prestamos",
+										"loan",
+										"get-all",
 										""
 									]
 								}
