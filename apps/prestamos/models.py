@@ -50,11 +50,17 @@ class Fund(BaseModel):
 class Loan(BaseModel):
 
     client = models.ForeignKey(Client,on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=10,decimal_places=2)
+    subtotal = models.DecimalField(max_digits=10,decimal_places=2)
+    total_amount = models.DecimalField(max_digits=10,decimal_places=2)
     interest_rate = models.DecimalField(max_digits=10,decimal_places=2)
     date = models.DateField(blank=False)
 
     objects = BaseModelManager()
+
+
+    def save(self, *args, **kwargs):
+        self.total_amount = self.subtotal * (self.interest_rate/100)
+        super(Loan,self).save(*args,*kwargs)
 
 class LoanDetail(BaseModel):
 
@@ -64,4 +70,20 @@ class LoanDetail(BaseModel):
 
     objects = BaseModelManager()
 
+class Payment(BaseModel):
+
+    loan = models.ForeignKey(Loan, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client,on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10,decimal_places=2)
+    date = models.DateField(blank=False)
+
+    objects = BaseModelManager()
+
+class PaymentDetail(BaseModel):
+
+    payment = models.ForeignKey(Payment,on_delete=models.CASCADE)
+    moneylender = models.ForeignKey(MoneyLender,on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10,decimal_places=2)
+
+    objects = BaseModelManager()
     

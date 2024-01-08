@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import (
     Client,
     Fund,
+    Loan,
     MoneyLender
     )
 
@@ -112,7 +113,21 @@ class ClientView(APIView):
         
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            status_code = status.HTTP_200_OK
+            data = {
+                'success':True,
+                'status_code':status_code,
+                'response':'El cliente ha sido actualizado',
+                'client': {
+                    'id': serializer.data['id'],
+                    'first_name':serializer.data['first_name'],
+                    'last_name':serializer.data['last_name'],
+                    'phone_number':serializer.data['phone_number'],
+                    'address':serializer.data['address'],
+                    'email':serializer.data['email'],
+                }
+            }
+            return Response(data)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
     def delete(self,request,pk):
@@ -319,6 +334,23 @@ class FundView(APIView):
             }
         return Response(data,status=status.HTTP_204_NO_CONTENT)
     
+class LoanListView(APIView):
+    
+    serializer_class = LoanSerializer
+    permission_classes = (IsAuthenticated,)
+    
+    def get(self,request):
+        loans = Loan.objects.all()
+        serializer = self.serializer_class(loans, many=True)
+        status_code = status.HTTP_200_OK
+        data = {
+            'success':True,
+            'status_code':status_code,
+            'response':'Ok',
+            'loans': serializer.data
+        }
+        return Response(data,status=status.HTTP_200_OK)
+    
 class LoanView(APIView):
         
     permission_classes = (IsAuthenticated,)
@@ -334,5 +366,11 @@ class LoanView(APIView):
         loan = loan_serializer.save()
         loan_detail_serializer.save(loan=loan)
 
-        return Response({'success': True, 'message': 'Préstamo y detalles creados con éxito.'}, status=status.HTTP_201_CREATED)
+        data = {
+            'success': True,
+            'response': 'Préstamo creado con éxito.',
+            'status_code': status.HTTP_201_CREATED 
+        }
+
+        return Response(data, status=status.HTTP_201_CREATED)
 

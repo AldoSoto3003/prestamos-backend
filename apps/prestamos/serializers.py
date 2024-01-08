@@ -1,6 +1,7 @@
 from django.contrib import auth
 from rest_framework import serializers
 from rest_framework import status
+from django.db import models
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import Client,MoneyLender,Fund, Loan, LoanDetail
@@ -96,9 +97,24 @@ class FundSerializer(serializers.ModelSerializer):
     
 class LoanSerializer(serializers.ModelSerializer):
 
+    client_name = serializers.CharField(source='client.first_name')
+    remaining_amount = serializers.SerializerMethodField()
+
     class Meta:
         model = Loan
         fields = '__all__'
+    
+    def get_remaining_amount(self, obj):
+        # Obtener el saldo inicial del préstamo
+        initial_amount = obj.amount
+
+        # Calcular la suma de los abonos para este préstamo
+        total_payments = obj.payment_set.aggregate(total_payments=models.Sum('total_amount'))['total_payments'] or 0
+
+        # Calcular el monto pendiente
+        remaining_amount = initial_amount - total_payments
+
+        return remaining_amount
     
 class LoanDetailSerializer(serializers.ModelSerializer):
     class Meta:
