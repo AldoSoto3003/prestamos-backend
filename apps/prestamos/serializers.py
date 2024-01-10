@@ -5,7 +5,7 @@ from django.db import models
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Sum
 
-from .models import Client,MoneyLender,Fund, Loan, LoanDetail
+from .models import Client,MoneyLender,Fund, Loan, LoanDetail, Payment, PaymentDetail
 
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -79,6 +79,13 @@ class MoneyLenderSerializer(serializers.ModelSerializer):
         
         return data
     
+class MoneyLenderByLoanSerializer(serializers.ModelSerializer):
+
+    moneylender = MoneyLenderSerializer()
+    class Meta:
+        model = LoanDetail
+        fields = '__all__'
+
 class FundSerializer(serializers.ModelSerializer):
     
     class Meta:
@@ -125,6 +132,20 @@ class GetAllLoanSerializer(serializers.ModelSerializer):
 class LoanDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = LoanDetail
+        fields = (
+            'moneylender',
+            'amount'
+        )
+
+class PaymentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Payment
+        fields = '__all__'
+
+class PaymentDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaymentDetail
         fields = (
             'moneylender',
             'amount'

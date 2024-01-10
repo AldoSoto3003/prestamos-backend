@@ -53,10 +53,10 @@ class Loan(BaseModel):
     subtotal = models.DecimalField(max_digits=10,decimal_places=2)
     total_amount = models.DecimalField(max_digits=10,decimal_places=2)
     interest_rate = models.DecimalField(max_digits=10,decimal_places=2)
+    # balance = models.DecimalField(max_digits=10,decimal_places=2)
     date = models.DateField(blank=False)
 
     objects = BaseModelManager()
-
 
     def save(self, *args, **kwargs):
         # Calcula el total_amount solo si el objeto es nuevo

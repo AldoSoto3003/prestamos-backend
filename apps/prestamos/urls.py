@@ -5,12 +5,14 @@ from .views import (
     ClientByNameView,
     ClientListView,
     LoanListView,
+    MoneyLenderListByLoanView,
     MoneyLenderView,
     MoneyLenderListView,
     MoneyLenderByNameView,
     FundByMoneyLenderView,
     FundView,
     LoanView,
+    PaymentView,
     )
 
 urlpatterns = [
@@ -28,6 +30,8 @@ urlpatterns = [
     path('moneylender/update/<int:pk>',MoneyLenderView.as_view(),name='moneylender-update'),
     path('moneylender/delete/<int:pk>',MoneyLenderView.as_view(),name='moneylender-delete'),
 
+    path('moneylender/loan/<int:pk>',MoneyLenderListByLoanView.as_view(),name='moneylender-get-by-loan'),
+
     path('fund/get-by-moneylender/<int:fk>',FundByMoneyLenderView.as_view(),name='fund-get-all'),
     path('fund/get/<int:pk>/',FundView.as_view(),name='fund-get-id'),
     path('fund/add/',FundView.as_view(),name='fund-add'),
@@ -35,6 +39,9 @@ urlpatterns = [
     path('fund/delete/<int:pk>',FundView.as_view(),name='fund-delete'),
 
     path('loan/add/',LoanView.as_view(),name='loan-add'),
-    path('loan/get-all/',LoanListView.as_view(), name='loan-get-all')
+    path('loan/get-all/',LoanListView.as_view(), name='loan-get-all'),
+
+    path('payment/add/',PaymentView.as_view(),name='payment-add'),
+    # path('payment/get-all/'),
 
 ]

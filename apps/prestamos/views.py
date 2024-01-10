@@ -8,6 +8,7 @@ from .models import (
     Client,
     Fund,
     Loan,
+    LoanDetail,
     MoneyLender
     )
 
@@ -17,7 +18,10 @@ from .serializers import (
     GetAllLoanSerializer,
     LoanDetailSerializer,
     LoanSerializer,
+    MoneyLenderByLoanSerializer,
     MoneyLenderSerializer,
+    PaymentDetailSerializer,
+    PaymentSerializer,
 )
 
 class ClientListView(APIView):
@@ -175,6 +179,23 @@ class MoneyLenderListView(APIView):
     def get(self,request):
         users = MoneyLender.objects.all()
         serializer = self.serializer_class(users, many=True)
+        status_code = status.HTTP_200_OK
+        data = {
+            'success':True,
+            'status_code':status_code,
+            'response':'Ok',
+            'moneylenders': serializer.data
+        }
+        return Response(data,status=status.HTTP_200_OK)
+    
+class MoneyLenderListByLoanView(APIView):
+    serializer_class = MoneyLenderByLoanSerializer
+    permission_classes = (IsAuthenticated,)
+    
+    def get(self,request,pk):
+        print(pk)
+        moneylenders = LoanDetail.objects.filter(loan_id=pk)
+        serializer = self.serializer_class(moneylenders, many=True)
         status_code = status.HTTP_200_OK
         data = {
             'success':True,
@@ -375,3 +396,26 @@ class LoanView(APIView):
 
         return Response(data, status=status.HTTP_201_CREATED)
 
+class PaymentView(APIView):
+        
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+
+        payment_serializer = PaymentSerializer(data=request.data)
+        payment_serializer.is_valid(raise_exception=True)
+
+        payment_detail_serializer = PaymentDetailSerializer(data=request.data['detalles'], many=True)
+        payment_detail_serializer.is_valid(raise_exception=True)
+
+        payment = payment_serializer.save()
+        payment_detail_serializer.save(payment=payment)
+
+        data = {
+            'success': True,
+            'response': 'Abono creado con éxito.',
+            'status_code': status.HTTP_201_CREATED 
+        }
+
+        return Response(data, status=status.HTTP_201_CREATED)
