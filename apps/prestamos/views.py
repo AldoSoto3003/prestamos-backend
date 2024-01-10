@@ -14,6 +14,7 @@ from .models import (
 from .serializers import (
     ClientSerializer,
     FundSerializer,
+    GetAllLoanSerializer,
     LoanDetailSerializer,
     LoanSerializer,
     MoneyLenderSerializer,
@@ -336,7 +337,7 @@ class FundView(APIView):
     
 class LoanListView(APIView):
     
-    serializer_class = LoanSerializer
+    serializer_class = GetAllLoanSerializer
     permission_classes = (IsAuthenticated,)
     
     def get(self,request):

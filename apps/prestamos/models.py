@@ -59,8 +59,12 @@ class Loan(BaseModel):
 
 
     def save(self, *args, **kwargs):
-        self.total_amount = self.subtotal * (self.interest_rate/100)
-        super(Loan,self).save(*args,*kwargs)
+        # Calcula el total_amount solo si el objeto es nuevo
+        if not self.id:
+            self.total_amount = self.subtotal * ((self.interest_rate / 100) + 1)
+
+        # Llama al método save del modelo base
+        super(Loan, self).save(*args, **kwargs)
 
 class LoanDetail(BaseModel):
 
