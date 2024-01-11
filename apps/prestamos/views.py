@@ -356,6 +356,32 @@ class FundView(APIView):
             }
         return Response(data,status=status.HTTP_204_NO_CONTENT)
     
+class LoanByNameView(APIView):
+    serializer_class = GetAllLoanSerializer
+    permission_classes = (IsAuthenticated,)
+    
+    def get_object(self,name):
+        try:
+            return Loan.objects.filter(client_name=name)
+        except Loan.DoesNotExist:
+            data = {
+                'success': False,
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'response':'No se encontró al usuario',
+            }
+            raise ValidationError(data)
+    
+    def get(self,request,name):
+        loan = self.get_object(name)
+        serializer = self.serializer_class(loan, many=True)
+        status_code = status.HTTP_200_OK
+        data = {
+            'success':True,
+            'status_code':status_code,
+            'response':'Ok',
+            'clients': serializer.data
+        }
+        return Response(data,status=status.HTTP_200_OK)
 class LoanListView(APIView):
     
     serializer_class = GetAllLoanSerializer

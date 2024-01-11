@@ -4,6 +4,7 @@ from .views import (
     ClientView,
     ClientByNameView,
     ClientListView,
+    LoanByNameView,
     LoanListView,
     MoneyLenderListByLoanView,
     MoneyLenderView,
@@ -40,6 +41,8 @@ urlpatterns = [
 
     path('loan/add/',LoanView.as_view(),name='loan-add'),
     path('loan/get-all/',LoanListView.as_view(), name='loan-get-all'),
+    path('loan/get/<str:name>/',LoanByNameView.as_view(), name='loan-by-name'),
+
 
     path('payment/add/',PaymentView.as_view(),name='payment-add'),
     # path('payment/get-all/'),
